@@ -1,10 +1,9 @@
-function App() {
-
+export function App (){
   return (
     <>
-      <p className="font-bold">Hello World</p>
+    
+      <h1>Hello World</h1>
+
     </>
   )
 }
-
-export default App
