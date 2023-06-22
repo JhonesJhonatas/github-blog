@@ -25,6 +25,11 @@ export const ProfileBox = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            a{
+                text-decoration: none;
+                color: ${props => props.theme['--blue']}
+            }
         }
 
         footer{
@@ -36,6 +41,7 @@ export const ProfileBox = styled.div`
                 display: flex;
                 align-items: center;
                 font-size: 1rem;
+                gap: 0.5rem;
             }
         }
     }
