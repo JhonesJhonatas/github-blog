@@ -1,7 +1,12 @@
 import { UsersThree, GithubLogo, Buildings, ArrowSquareOut } from '@phosphor-icons/react'
 import { ProfileBox } from './styles'
+import { useContext } from 'react'
+import { UserInfoContext } from '../../contexts/userContext'
 
 export function ProfileCard() {
+
+    const { userInfo } = useContext(UserInfoContext)
+
     return (
 
         <ProfileBox >
@@ -12,17 +17,17 @@ export function ProfileCard() {
 
                 <header>
 
-                    <h1>Jhones Jhonatas</h1>
-                    <a href="https://github.com/jhonesjhonatas" target="_blank">GitHub <ArrowSquareOut /></a>
+                    <h1>{userInfo.name}</h1>
+                    <a href={`https://github.com/${userInfo.login}`} target="_blank">GitHub <ArrowSquareOut /></a>
 
                 </header>
 
-                <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
+                <p>{userInfo.bio}</p>
 
                 <footer>
-                    <p><GithubLogo /> username</p>
-                    <p><Buildings /> enterprise</p>
-                    <p><UsersThree /> 253</p>
+                    <p><GithubLogo /> {userInfo.login}</p>
+                    <p><Buildings /> {userInfo.company}</p>
+                    <p><UsersThree /> {userInfo.followers}</p>
                 </footer>
 
             </div>

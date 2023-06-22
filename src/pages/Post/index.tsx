@@ -1,8 +1,13 @@
 import { PostCodeContent, PostContentArea, PostHeaderContainer } from "./styles";
 import { CaretLeft, ArrowSquareOut, GithubLogo, Calendar, ChatCircle } from '@phosphor-icons/react'
 import { NavLink } from 'react-router-dom'
+import { UserInfoContext } from "../../contexts/userContext";
+import { useContext } from 'react'
 
 export function Post() {
+
+    const { userInfo } = useContext(UserInfoContext)
+
     return (
         <>
 
@@ -24,7 +29,7 @@ export function Post() {
                     <footer>
                         <div>
                             <GithubLogo />
-                            <p>cameronwll</p>
+                            <p>{userInfo.login}</p>
                         </div>
                         <div>
                             <Calendar />

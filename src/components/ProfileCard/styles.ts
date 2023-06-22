@@ -19,7 +19,9 @@ export const ProfileBox = styled.div`
     div{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 1.5rem;
+        width: 100%;
 
         header{
             display: flex;

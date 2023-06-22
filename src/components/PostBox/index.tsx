@@ -1,13 +1,19 @@
 import { PostBoxContainer } from "./styles";
 
-export function PostBox(){
+interface PostBoxProps {
+    title: string,
+    date: Date,
+    description: string,
+}
+
+export function PostBox({title, date ,description}:PostBoxProps){
     return(
         <PostBoxContainer>
             <header>
-                <span>JavaScript data types and data structures</span>
-                <span>Há 1 dia</span>
+                <span>{title}</span>
+                <span>{date}</span>
             </header>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
+            <p>{description}</p>
         </PostBoxContainer>
     )
 }

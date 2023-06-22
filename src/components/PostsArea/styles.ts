@@ -7,6 +7,7 @@ export const PostsAreaConainer = styled.div`
     max-width: 900px;
     margin: 0 auto;
     margin-top: 2rem;
+    margin-bottom: 4rem;
 
     a{
         text-decoration: none;

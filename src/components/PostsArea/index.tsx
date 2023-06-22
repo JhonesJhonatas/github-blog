@@ -1,29 +1,27 @@
 import { PostBox } from "../PostBox";
 import { PostsAreaConainer } from "./styles";
 import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { RepoIssuesContext } from "../../contexts/repoIssues";
+
 
 export function PostsArea() {
+
+    const { repoIssues } = useContext(RepoIssuesContext)
+
     return (
 
         <PostsAreaConainer>
 
-            <NavLink to={'/post'}>
+            {repoIssues.map(issue => {
+                return (
+                    <NavLink key={issue.id} to={'/post'}>
 
-                <PostBox />
+                        <PostBox title={issue.title} date={issue.updated_at} description={issue.body} />
 
-            </NavLink>
-
-            <NavLink to={'/post'}>
-
-                <PostBox />
-
-            </NavLink>
-
-            <NavLink to={'/post'}>
-
-                <PostBox />
-
-            </NavLink>
+                    </NavLink>
+                )
+            })}
 
         </PostsAreaConainer>
 

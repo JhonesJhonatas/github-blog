@@ -23,6 +23,11 @@ export const PostHeaderContainer = styled.div`
             align-items: center;
             gap: 0.25rem;
         }
+
+        a{
+            text-decoration: none;
+            color: ${props => props.theme['--blue']}
+        }
     }
 
     footer{

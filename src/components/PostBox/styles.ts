@@ -8,6 +8,8 @@ export const PostBoxContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     header{
         display: flex;
