@@ -3,6 +3,7 @@ import axios from 'axios'
 
 interface repoIssues {
     id: number,
+    number: number,
     body: 'string'
     updated_at: Date,
     title: 'string'

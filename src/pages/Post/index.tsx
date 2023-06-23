@@ -1,19 +1,39 @@
 import { PostCodeContent, PostContentArea, PostHeaderContainer } from "./styles";
 import { CaretLeft, ArrowSquareOut, GithubLogo, Calendar, ChatCircle } from '@phosphor-icons/react'
-import { NavLink } from 'react-router-dom'
-import { UserInfoContext } from "../../contexts/userContext";
-import { useContext } from 'react'
+import { NavLink, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+
+interface userSchema{
+    login: 'string'
+}
+
+interface issueInfosSchema{
+    user: userSchema,
+}
 
 export function Post() {
 
-    const { userInfo } = useContext(UserInfoContext)
+    const { issueNumber } = useParams()
+    const [issueInfos, setIssueInfos] = useState({} as issueInfosSchema)
+
+    useEffect(() => {
+
+        axios.get(`https://api.github.com/repos/jhonesjhonatas/dt-money/issues/${issueNumber}`)
+        .then(response => setIssueInfos(response.data))
+
+    }, [])
+
+    function handleConsole(){
+        console.log(issueInfos)
+    }
 
     return (
         <>
 
             <section>
 
-                <PostHeaderContainer>
+                <PostHeaderContainer onClick={handleConsole}>
 
                     <header>
                         <NavLink to={'/'}>
@@ -29,7 +49,7 @@ export function Post() {
                     <footer>
                         <div>
                             <GithubLogo />
-                            <p>{userInfo.login}</p>
+                            <p>{issueInfos.user.login}</p>
                         </div>
                         <div>
                             <Calendar />

@@ -15,7 +15,7 @@ export function PostsArea() {
 
             {repoIssues.map(issue => {
                 return (
-                    <NavLink key={issue.id} to={'/post'}>
+                    <NavLink key={issue.id} to={`/post/${issue.number}`}>
 
                         <PostBox title={issue.title} date={issue.updated_at} description={issue.body} />
 

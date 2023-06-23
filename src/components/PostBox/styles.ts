@@ -10,6 +10,7 @@ export const PostBoxContainer = styled.div`
     gap: 1.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-height: 10rem;
 
     header{
         display: flex;

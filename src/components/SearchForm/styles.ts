@@ -26,6 +26,7 @@ export const SearchFormContet = styled.div`
         border-style: solid;
         border-color: ${props => props.theme['--gray-300']};
         background-color: ${props => props.theme['--gray-900']};
+        color: ${props => props.theme['--gray-100']};
 
         &::placeholder{
             font-weight: bold;
