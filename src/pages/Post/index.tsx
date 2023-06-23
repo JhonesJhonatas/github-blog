@@ -1,16 +1,22 @@
-import { PostCodeContent, PostContentArea, PostHeaderContainer } from "./styles";
+import { PostContentArea, PostHeaderContainer } from "./styles";
 import { CaretLeft, ArrowSquareOut, GithubLogo, Calendar, ChatCircle } from '@phosphor-icons/react'
 import { NavLink, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import ReactMarkdown from 'react-markdown'
 
-interface userSchema{
-    login: 'string'
+interface issueInfosSchema {
+    user: {
+        login: 'string'
+    }
+    body: 'string',
+    comments: number,
+    created_at: Date,
+    html_url: string,
+    title: string,
 }
 
-interface issueInfosSchema{
-    user: userSchema,
-}
+const dateFormatter = new Intl.DateTimeFormat('pt-BR')
 
 export function Post() {
 
@@ -20,44 +26,42 @@ export function Post() {
     useEffect(() => {
 
         axios.get(`https://api.github.com/repos/jhonesjhonatas/dt-money/issues/${issueNumber}`)
-        .then(response => setIssueInfos(response.data))
+            .then(response => setIssueInfos(response.data))
 
-    }, [])
+    }, [issueNumber])
 
-    function handleConsole(){
-        console.log(issueInfos)
-    }
+    console.log(issueInfos)
 
     return (
         <>
 
             <section>
 
-                <PostHeaderContainer onClick={handleConsole}>
+                <PostHeaderContainer>
 
                     <header>
                         <NavLink to={'/'}>
                             <span><CaretLeft />VOTLAR</span>
                         </NavLink>
-                        <a href="">
+                        <a href={issueInfos.html_url} target="_blank">
                             <span><ArrowSquareOut />VER NO GITHUB</span>
                         </a>
                     </header>
 
-                    <h1>JavaScript data types and data structures</h1>
+                    <h1>{issueInfos.title}</h1>
 
                     <footer>
                         <div>
                             <GithubLogo />
-                            <p>{issueInfos.user.login}</p>
+                            <p>{}</p>
                         </div>
                         <div>
                             <Calendar />
-                            <p>Há 1 dia</p>
+                            <p>{}</p>
                         </div>
                         <div>
                             <ChatCircle />
-                            <p>5 comentários</p>
+                            <p>{`${issueInfos.comments} comentários`}</p>
                         </div>
                     </footer>
 
@@ -67,29 +71,11 @@ export function Post() {
 
             <PostContentArea>
 
-                <p>
-                    Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.
-                </p>
+                <ReactMarkdown>
 
-                <a href="">Dynamic typing</a>
+                    {issueInfos.body}
 
-                <p>
-                    JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types:
-                </p>
-
-                <PostCodeContent>
-
-                    <p>
-                        let foo = 42;   // foo is now a number
-                    </p>
-                    <p>
-                        foo = ‘bar’;    // foo is now a string
-                    </p>
-                    <p>
-                        foo = true;     // foo is now a boolean
-                    </p>
-
-                </PostCodeContent>
+                </ReactMarkdown>
 
             </PostContentArea>
 

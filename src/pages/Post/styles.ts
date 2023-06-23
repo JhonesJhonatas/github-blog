@@ -50,6 +50,8 @@ export const PostContentArea = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    img{max-width: 850px}
 `
 
 export const PostCodeContent = styled.div`
