@@ -1,10 +1,16 @@
 import { SearchFormContet } from "./styles";
-import { useContext } from 'react'
+import { ChangeEvent, useContext } from 'react'
 import { RepoIssuesContext } from '../../contexts/repoIssues'
 
 export function SearchForm(){
 
     const { repoIssues } = useContext(RepoIssuesContext)
+
+    function handleChangeInput(event: ChangeEvent<HTMLInputElement>){
+
+        console.log(event?.target.value)
+        
+    }
 
     return (
 
@@ -15,7 +21,7 @@ export function SearchForm(){
                 <span>{repoIssues.length} publicações</span>
             </div>
 
-            <input type="text" placeholder="Buscar conteúdo" />
+            <input name="searchInput" onChange={handleChangeInput} type="text" placeholder="Buscar conteúdo" />
 
         </SearchFormContet>
     )

@@ -7,9 +7,9 @@ import ReactMarkdown from 'react-markdown'
 
 interface issueInfosSchema {
     user: {
-        login: 'string'
-    }
-    body: 'string',
+        login: string
+    },
+    body: string,
     comments: number,
     created_at: Date,
     html_url: string,
@@ -21,7 +21,16 @@ const dateFormatter = new Intl.DateTimeFormat('pt-BR')
 export function Post() {
 
     const { issueNumber } = useParams()
-    const [issueInfos, setIssueInfos] = useState({} as issueInfosSchema)
+    const [issueInfos, setIssueInfos] = useState<issueInfosSchema>({
+        user: {
+            login: ''
+        },
+        body: '',
+        comments: 0,
+        created_at: new Date(),
+        html_url: '',
+        title: '',
+    })
 
     useEffect(() => {
 
@@ -29,8 +38,6 @@ export function Post() {
             .then(response => setIssueInfos(response.data))
 
     }, [issueNumber])
-
-    console.log(issueInfos)
 
     return (
         <>
@@ -41,7 +48,7 @@ export function Post() {
 
                     <header>
                         <NavLink to={'/'}>
-                            <span><CaretLeft />VOTLAR</span>
+                            <span><CaretLeft />VOLTAR</span>
                         </NavLink>
                         <a href={issueInfos.html_url} target="_blank">
                             <span><ArrowSquareOut />VER NO GITHUB</span>
@@ -53,11 +60,11 @@ export function Post() {
                     <footer>
                         <div>
                             <GithubLogo />
-                            <p>{}</p>
+                            <p>{issueInfos.user.login}</p>
                         </div>
                         <div>
                             <Calendar />
-                            <p>{}</p>
+                            <p>{dateFormatter.format(new Date(issueInfos.created_at))}</p>
                         </div>
                         <div>
                             <ChatCircle />
