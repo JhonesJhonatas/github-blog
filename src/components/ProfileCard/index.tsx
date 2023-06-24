@@ -26,7 +26,7 @@ export function ProfileCard() {
 
                 <footer>
                     <p><GithubLogo /> {userInfo.login}</p>
-                    <p><Buildings /> {userInfo.company}</p>
+                    <p><Buildings /> {userInfo.company === null ? 'Não informado' : userInfo.company}</p>
                     <p><UsersThree /> {userInfo.followers}</p>
                 </footer>
 

@@ -1,15 +1,18 @@
-import { SearchFormContet } from "./styles";
-import { ChangeEvent, useContext } from 'react'
+import { SearchButton, SearchFormContet } from "./styles";
+import { useContext } from 'react'
 import { RepoIssuesContext } from '../../contexts/repoIssues'
+import { MagnifyingGlass } from "@phosphor-icons/react";
 
-export function SearchForm(){
+export function SearchForm() {
 
-    const { repoIssues } = useContext(RepoIssuesContext)
+    const { repoIssues, changeSearchParams } = useContext(RepoIssuesContext)
 
-    function handleChangeInput(event: ChangeEvent<HTMLInputElement>){
+    function handleChangeInput(event: any) {
 
-        console.log(event?.target.value)
-        
+        event.preventDefault()
+
+        changeSearchParams(event?.target.searchInput.value)
+
     }
 
     return (
@@ -21,7 +24,13 @@ export function SearchForm(){
                 <span>{repoIssues.length} publicações</span>
             </div>
 
-            <input name="searchInput" onChange={handleChangeInput} type="text" placeholder="Buscar conteúdo" />
+            <form onSubmit={handleChangeInput}>
+
+                <input name="searchInput" type="text" placeholder="Buscar conteúdo" />
+                
+                <SearchButton type="submit" ><MagnifyingGlass /> Pesquisar</SearchButton>
+
+            </form>
 
         </SearchFormContet>
     )

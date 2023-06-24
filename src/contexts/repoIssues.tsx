@@ -11,6 +11,8 @@ interface repoIssues {
 
 interface repoIssuesContextSchema {
     repoIssues: repoIssues[],
+    searchParam: string,
+    changeSearchParams: Function,
 }
 
 interface RepoIssuesProviderProps {
@@ -23,17 +25,24 @@ export const RepoIssuesContext = createContext({} as repoIssuesContextSchema)
 export function RepoIssuesProvider({ children }: RepoIssuesProviderProps) {
 
     const [repoIssues, setRepoIssues] = useState<repoIssues[]>([])
+    const [searchParam, setSearchParam] = useState('')
+
+    function changeSearchParams(text: string){
+
+        setSearchParam(text)
+
+    }
 
     useEffect(() => {
-        axios.get('https://api.github.com/search/issues?q=repo:jhonesjhonatas/dt-money')
+        axios.get(`https://api.github.com/search/issues?q=${searchParam}repo:jhonesjhonatas/dt-money`)
             .then(response => {
                 setRepoIssues([...response.data.items])
             })
-    }, [])
+    }, [searchParam])
 
     return (
 
-        <RepoIssuesContext.Provider value={{ repoIssues }}>
+        <RepoIssuesContext.Provider value={{ repoIssues, searchParam, changeSearchParams }}>
 
             {children}
 
